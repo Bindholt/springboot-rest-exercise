@@ -1,5 +1,8 @@
 package kea.exercise.productorderexercise.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,6 +17,7 @@ public class Order {
     private LocalDate OrderDate;
     private boolean confirmed;
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<OrderLine> orderLines;
 
     public Order(int id, LocalDate orderDate, boolean confirmed, List<OrderLine> orderLines) {
